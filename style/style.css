@@ -10,16 +10,19 @@
 }
 
 #navbar_supported_content ul > li > button {
-    font-weight: bold;
-    color: black;
-
+  font-weight: bold;
+  color: black;
 }
 
 #pills_tabcontent {
-
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
   margin: 0px auto;
-  padding: 20px; /* important factor */
+  padding: 30px; /* important factor */
+}
+
+#pills_home_tabcontent .row .col {
+  border-width: 4px !important;
+  border-radius: 8px !important;
 }
