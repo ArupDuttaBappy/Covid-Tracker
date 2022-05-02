@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="countrylist.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/e3f7f5af43.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style/style.css">
@@ -48,27 +51,31 @@
           <div class="tab-pane fade show active" id="pills_home_tabcontent" role="tabpanel" aria-labelledby="navbar_pills_home_tab">
             <!-- highlights -->
             <div class="row">
-              <div class="col text-center m-auto">
+              <div class="col text-center m-auto d-flex flex-column">
                 <h4 id="hometab_country_name">CountryName</h4>
+                <div id="clickable_country_change">
+                  <span class="" id="change_to_other_country"><i class="fa-solid fa-2x fa-globe"></i></span>
+                  <span class="d-none" id="change_to_my_location"><i class="fa-solid fa-2x fa-location-crosshairs"></i></span>
+                </div>
               </div>
               <div class="col d-flex flex-column m-2 px-3 border border-primary rounded">
                 <h5 class="text-primary">Total Cases</h5>
-                <h2 id="hometab_total_cases">00,000,000</h2>
+                <h2 id="hometab_total_cases">000,000,000</h2>
                 <h5>+<span id="hometab_new_cases">000</span></h5>
               </div>
               <div class="col d-flex flex-column m-2 px-3 border border-danger rounded">
-                <h5 class="text-danger">Deaths</h5>
-                <h2 id="hometab_total_deaths">00,000</h2>
+                <h5 class="text-danger">Total Deaths</h5>
+                <h2 id="hometab_total_deaths">000,000</h2>
                 <h5>+<span id="hometab_new_deaths">000</span></h5>
               </div>
               <div class="col d-flex flex-column m-2 px-3 border border-success rounded">
-                <h5 class="text-success">Recovered</h5>
-                <h2 id="hometab_total_recovered">00,000,000</h2>
+                <h5 class="text-success">Total Recovered</h5>
+                <h2 id="hometab_total_recovered">000,000</h2>
                 <h5>+<span id="hometab_new_recovered">000</span></h5>
               </div>
             </div>
             <!-- chart.js -->
-            <!--  -->
+            <canvas id="myChart" width="400" height="400"></canvas>
           </div>
 
           <div class="tab-pane fade" id="pills_map_tabcontent" role="tabpanel" aria-labelledby="navbar_pills_map_tab">

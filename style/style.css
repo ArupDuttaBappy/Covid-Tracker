@@ -26,3 +26,10 @@
   border-width: 4px !important;
   border-radius: 8px !important;
 }
+
+#clickable_country_change i {
+  cursor: pointer;
+  border: 3px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
