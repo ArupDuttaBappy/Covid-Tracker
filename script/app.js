@@ -1,4 +1,22 @@
 window.addEventListener("load", () => {
+
+  //  navbar search
+  document.getElementById("navbar_search_country_input").addEventListener('focus', () => {
+    // document.getElementById("select_country_modal_body").innerHTML += `
+    // <div class='country_modal_element col-3 mx-3 my-1 px-3 border border-secondary rounded'>
+    // ${country}
+    // </div>
+    // `;
+    document.getElementById("navbar_search_dropdown_div").classList.toggle("d-none");
+  });
+
+  document.getElementById("navbar_search_country_input").addEventListener('blur', () => {
+    document.getElementById("navbar_search_country_input").value = "";
+    document.getElementById("navbar_search_dropdown_div").classList.toggle("d-none");
+  });
+  //  navbar search
+
+
   //  homepage highlights
   let hometab_country_name_selector = document.getElementById('hometab_country_name');
   let hometab_total_cases_selector = document.getElementById('hometab_total_cases');
@@ -9,7 +27,6 @@ window.addEventListener("load", () => {
   let hometab_new_recovered_selector = document.getElementById('hometab_new_recovered');
   let country_name;
   let api_key = config.secret_api_key;
-
 
   // modal -- starts
   document.getElementById("select_country_modal_body").innerHTML = "";

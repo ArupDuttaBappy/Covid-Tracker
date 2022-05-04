@@ -34,10 +34,32 @@
                 <button class="nav-link" id="navbar_pills_about_tab" data-bs-toggle="pill" data-bs-target="#pills_about_tabcontent" type="button" role="tab" aria-controls="pills_about_tabcontent" aria-selected="false">About</button>
               </li>
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" id="navbar_search_country_input" type="search" placeholder="search country" aria-label="Search">
-              <button class="" id="navbar_search_country_btn" type="submit">Search</button>
-            </form>
+            <div id="navbar_search_div">
+              <form class="d-flex">
+                <input class="form-control me-2" id="navbar_search_country_input" autocomplete="off" type="search" placeholder="search country" aria-label="Search">
+                <button class="" id="navbar_search_country_btn" type="submit">Search</button>
+              </form>
+              <div id="navbar_search_dropdown_div" class="d-none">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="vw-100 border border-warning">#</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>1</th>
+                    </tr>
+                    <tr>
+                      <th>2</th>
+                    </tr>
+                    <tr>
+                      <th>3</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
@@ -112,7 +134,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <form class="d-flex m-auto p-2 vw-100">
-            <input class="form-control me-2 border border-dark p-1" id="select_country_modal_search_input" type="search" placeholder="type here.." aria-label="Search">
+            <input class="form-control me-2 border border-dark p-1" id="select_country_modal_search_input" autocomplete="off" type="search" placeholder="type here.." aria-label="Search">
           </form>
           <button id="select_country_modal_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>

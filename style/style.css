@@ -68,27 +68,13 @@
   background-color: #a6a6a6;
 }
 
-/* .dropdown {
-  display: inline-block;
+#navbar_search_country_input {
   position: relative;
+  display: inline-block;
 }
-.dropdown-content {
-  display: none;
+
+#navbar_search_dropdown_div {
   position: absolute;
-  width: 100%;
-  overflow: auto;
-  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+  display: inline-block;
+  background-color: #f6f6f6;
 }
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-.dropdown-content a {
-  display: block;
-  color: #000000;
-  padding: 5px;
-  text-decoration: none;
-}
-.dropdown-content a:hover {
-  color: #FFFFFF;
-  background-color: #00A4BD;
-} */
