@@ -7,30 +7,47 @@ window.addEventListener("load", () => {
   let hometab_new_deaths_selector = document.getElementById('hometab_new_deaths');
   let hometab_total_recovered_selector = document.getElementById('hometab_total_recovered');
   let hometab_new_recovered_selector = document.getElementById('hometab_new_recovered');
-
   let country_name;
-  // let cases_list = [];
-  // let deaths_list = [];
-  // let recovered_list = [];
-  // let dates = [];
   let api_key = config.secret_api_key;
 
 
-  document.getElementById("select_country_modal_body").innerHTML = ""; // modal populate starts
-  country_list.forEach(data => {
+  // modal -- starts
+  document.getElementById("select_country_modal_body").innerHTML = "";
+
+  function populate_modal(country) {
     document.getElementById("select_country_modal_body").innerHTML += `
     <div class='country_modal_element col-3 mx-3 my-1 px-3 border border-secondary rounded'>
-    ${data.Country}
+    ${country}
     </div>
     `;
+  }
+
+  document.getElementById("select_country_modal_search_input").addEventListener("keyup", () => {
+    document.getElementById("select_country_modal_body").innerHTML = "";
+    let keytyped_input = document.getElementById("select_country_modal_search_input").value.toUpperCase();
+    country_list.forEach(data => {
+      if(data.Country.toUpperCase().includes(keytyped_input)) {
+        populate_modal(data.Country);
+      }
+    });
+    add_eventlistener_to_modal_elements();
   });
+
+  country_list.forEach(data => {
+    populate_modal(data.Country);
+    add_eventlistener_to_modal_elements();
+  });
+
+  function add_eventlistener_to_modal_elements() {
   let nodeList = document.querySelectorAll(".country_modal_element");
   for (let i = 0; i < nodeList.length; i++) {
     nodeList[i].addEventListener ("click", (e) => {
       document.getElementById("select_country_modal_close").click();
       homepage_country_data_fetch(e.target.innerText);
     });
-  }   // modal populate ends
+  }
+}
+  // modal -- ends
 
 
   function wait_and_load_func() {
@@ -158,6 +175,11 @@ window.addEventListener("load", () => {
     click_change_to_other_country_selector.addEventListener("click", () => {
       click_change_to_other_country_selector.classList.toggle("d-none");
       click_change_to_my_country_selector.classList.toggle("d-none");
+      document.getElementById("select_country_modal_search_input").value = '';
+      country_list.forEach(data => {
+        populate_modal(data.Country);
+        add_eventlistener_to_modal_elements();
+      });
     });
 
     click_change_to_my_country_selector.addEventListener("click", () => {
