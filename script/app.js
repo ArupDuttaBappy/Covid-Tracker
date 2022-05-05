@@ -14,7 +14,6 @@ window.addEventListener("load", () => {
 
   navbar_search_country_input.addEventListener("keypress", function(e) {
     if (e.key === "Enter") {
-      // alert(event.key  + " " + event.which);
       e.preventDefault();
     }
   });
@@ -212,7 +211,7 @@ window.addEventListener("load", () => {
         .catch(error => console.log('error', error));
 
         // chart.js script
-        //
+        // cases_list, deaths_list, recovered_list, dates
     }
 
     function format_date_for_chart(fetchdate) {
@@ -263,8 +262,6 @@ window.addEventListener("load", () => {
       console.log(country_name);
       homepage_country_data_fetch("Bangladesh");
     }
-
-
     //  change country, ends
 
 
@@ -351,5 +348,5 @@ window.addEventListener("load", () => {
       }
     })
     .catch(error => console.log('error', error));
-    //  Country List Tab ends
   });
+  //  Country List Tab ends
