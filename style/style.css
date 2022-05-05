@@ -76,5 +76,10 @@
 #navbar_search_dropdown_div {
   position: absolute;
   display: inline-block;
-  background-color: #f6f6f6;
+  border: 2px solid black;
+}
+
+#navbar_search_dropdown_tbody {
+  cursor: pointer;
+  height: 60vh;
 }

@@ -1,18 +1,58 @@
 window.addEventListener("load", () => {
 
   //  navbar search
+  // document.getElementById("select_country_modal_search_input").addEventListener("keyup", () => {
+  //   document.getElementById("select_country_modal_body").innerHTML = "";
+  //   let keytyped_input = document.getElementById("select_country_modal_search_input").value.toUpperCase();
+  //   country_list.forEach(data => {
+  //     if(data.Country.toUpperCase().includes(keytyped_input)) {
+  //       populate_modal(data.Country);
+  //     }
+  //   });
+  //   add_eventlistener_to_modal_elements();
+  // });
+  //
+
+  document.getElementById("navbar_search_dropdown_tbody").innerHTML = "";
+  function populate_search_dropdown(country) {
+    document.getElementById("navbar_search_dropdown_tbody").innerHTML += `
+    <tr class="search_dropdown_element">
+      <th>${country}</th>
+    </tr>
+    `;
+  }
+
+  function add_eventlistener_to_search_dropdown_elements() {
+    let nodeList = document.querySelectorAll(".search_dropdown_element");
+    for (let i = 0; i < nodeList.length; i++) {
+      nodeList[i].addEventListener ("click", (e) => {
+        homepage_country_data_fetch(e.target.innerText);
+        document.getElementById("navbar_search_country_input").value = e.target.innerText;
+        document.getElementById("navbar_search_dropdown_div").classList.add("d-none");
+      });
+    }
+  }
+
+  country_list.forEach(data => {
+    populate_search_dropdown(data.Country);
+    add_eventlistener_to_search_dropdown_elements();
+  });
+
   document.getElementById("navbar_search_country_input").addEventListener('focus', () => {
-    // document.getElementById("select_country_modal_body").innerHTML += `
-    // <div class='country_modal_element col-3 mx-3 my-1 px-3 border border-secondary rounded'>
-    // ${country}
-    // </div>
-    // `;
-    document.getElementById("navbar_search_dropdown_div").classList.toggle("d-none");
+
+    // box.classList.add('bg-blue', 'text-white');
+    // document.getElementById("myElement").style.cssText = "display: block; position: absolute";
+    document.getElementById("navbar_search_dropdown_div").classList.remove("d-none");
   });
 
   document.getElementById("navbar_search_country_input").addEventListener('blur', () => {
     document.getElementById("navbar_search_country_input").value = "";
-    document.getElementById("navbar_search_dropdown_div").classList.toggle("d-none");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("#navbar_search_div")) {
+      document.getElementById("navbar_search_dropdown_div").classList.add("d-none");
+    }
   });
   //  navbar search
 
@@ -56,14 +96,14 @@ window.addEventListener("load", () => {
   });
 
   function add_eventlistener_to_modal_elements() {
-  let nodeList = document.querySelectorAll(".country_modal_element");
-  for (let i = 0; i < nodeList.length; i++) {
-    nodeList[i].addEventListener ("click", (e) => {
-      document.getElementById("select_country_modal_close").click();
-      homepage_country_data_fetch(e.target.innerText);
-    });
+    let nodeList = document.querySelectorAll(".country_modal_element");
+    for (let i = 0; i < nodeList.length; i++) {
+      nodeList[i].addEventListener ("click", (e) => {
+        document.getElementById("select_country_modal_close").click();
+        homepage_country_data_fetch(e.target.innerText);
+      });
+    }
   }
-}
   // modal -- ends
 
 
