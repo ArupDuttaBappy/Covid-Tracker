@@ -1,19 +1,32 @@
 window.addEventListener("load", () => {
 
   //  navbar search
-  // document.getElementById("select_country_modal_search_input").addEventListener("keyup", () => {
-  //   document.getElementById("select_country_modal_body").innerHTML = "";
-  //   let keytyped_input = document.getElementById("select_country_modal_search_input").value.toUpperCase();
-  //   country_list.forEach(data => {
-  //     if(data.Country.toUpperCase().includes(keytyped_input)) {
-  //       populate_modal(data.Country);
-  //     }
-  //   });
-  //   add_eventlistener_to_modal_elements();
-  // });
-  //
+  document.getElementById("navbar_search_country_input").addEventListener("keyup", () => {
+    document.getElementById("navbar_search_dropdown_tbody").innerHTML = "";
+    let keytyped_input = document.getElementById("navbar_search_country_input").value.toUpperCase();
+    country_list.forEach(data => {
+      if(data.Country.toUpperCase().includes(keytyped_input)) {
+        populate_search_dropdown(data.Country);
+      }
+    });
+    add_eventlistener_to_search_dropdown_elements();
+  });
+
+  navbar_search_country_input.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+      // alert(event.key  + " " + event.which);
+      e.preventDefault();
+    }
+  });
+
+  document.getElementById("navbar_search_country_btn").addEventListener("click", (e) => {
+    e.preventDefault();
+    let key_cache = document.getElementById('navbar_search_country_input').value;
+    homepage_country_data_fetch(key_cache);
+  });
 
   document.getElementById("navbar_search_dropdown_tbody").innerHTML = "";
+
   function populate_search_dropdown(country) {
     document.getElementById("navbar_search_dropdown_tbody").innerHTML += `
     <tr class="search_dropdown_element">
@@ -39,18 +52,12 @@ window.addEventListener("load", () => {
   });
 
   document.getElementById("navbar_search_country_input").addEventListener('focus', () => {
-
-    // box.classList.add('bg-blue', 'text-white');
-    // document.getElementById("myElement").style.cssText = "display: block; position: absolute";
     document.getElementById("navbar_search_dropdown_div").classList.remove("d-none");
-  });
-
-  document.getElementById("navbar_search_country_input").addEventListener('blur', () => {
-    document.getElementById("navbar_search_country_input").value = "";
   });
 
   document.addEventListener("click", (e) => {
     if (!e.target.closest("#navbar_search_div")) {
+      document.getElementById("navbar_search_country_input").value = "";
       document.getElementById("navbar_search_dropdown_div").classList.add("d-none");
     }
   });
@@ -88,6 +95,13 @@ window.addEventListener("load", () => {
       }
     });
     add_eventlistener_to_modal_elements();
+  });
+
+  select_country_modal_search_input.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      // alert(event.key  + " " + event.which);
+      event.preventDefault();
+    }
   });
 
   country_list.forEach(data => {
