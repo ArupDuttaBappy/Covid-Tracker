@@ -352,6 +352,19 @@ window.addEventListener("load", () => {
     }
     //  Chart-JS ends
 
+    // document.getElementsByClassName('form-check-input').addEventListener('click', (e) => {
+    //   let radio_data = e.target.value;
+    //   console.log(radio_data);
+    // });
+    let nodeList2 = document.querySelectorAll(".form-check-input");
+    for (let i = 0; i < nodeList2.length; i++) {
+      nodeList2[i].addEventListener ("click", (e) => {
+        let radio_data = e.target.value;
+        console.log(radio_data);
+      });
+    }
+
+
 
     //  Country List Tab starts
     let country_table_row = document.getElementById('country_list_table_body');

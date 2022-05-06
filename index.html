@@ -83,8 +83,25 @@
               </div>
             </div>
             <!-- chart.js -->
-            <div class="chart-container" style="position: relative; height:50vh; width:85vw">
-              <canvas id="covid_stat_chart" style="max-height:320px;"></canvas>
+            <div class="chart-container">
+              <div class="text-center">
+                <div class="form-check-inline">
+                  <label class=""><b>Last: </b></label>
+                </div>
+                <div class="form-check form-check-inline" style="font-size:13px;font-weight:bold;">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" value="30" id="radio_last_30_days">
+                  <label class="form-check-label" for="radio_last_30_days">30 Days</label>
+                </div>
+                <div class="form-check form-check-inline" style="font-size:13px;font-weight:bold;">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" value="180" id="radio_last_6_months">
+                  <label class="form-check-label" for="radio_last_6_months">6 Months</label>
+                </div>
+                <div class="form-check form-check-inline" style="font-size:13px;font-weight:bold;">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" value="2" id="radio_last_all_data" checked>
+                  <label class="form-check-label" for="radio_last_all_data">All Data</label>
+                </div>
+              </div>
+              <canvas id="covid_stat_chart" style="max-height:300px;max-width:85vw"></canvas>
             </div>
           </div>
 
