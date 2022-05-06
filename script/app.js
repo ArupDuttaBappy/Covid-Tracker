@@ -21,6 +21,7 @@ window.addEventListener("load", () => {
   document.getElementById("navbar_search_country_btn").addEventListener("click", (e) => {
     e.preventDefault();
     let key_cache = document.getElementById('navbar_search_country_input').value;
+    covid_stat.destroy(); // destroy chart
     homepage_country_data_fetch(key_cache);
   });
 
@@ -38,6 +39,7 @@ window.addEventListener("load", () => {
     let nodeList = document.querySelectorAll(".search_dropdown_element");
     for (let i = 0; i < nodeList.length; i++) {
       nodeList[i].addEventListener ("click", (e) => {
+        covid_stat.destroy();
         homepage_country_data_fetch(e.target.innerText);
         document.getElementById("navbar_search_country_input").value = e.target.innerText;
         document.getElementById("navbar_search_dropdown_div").classList.add("d-none");
@@ -73,6 +75,7 @@ window.addEventListener("load", () => {
   let hometab_new_recovered_selector = document.getElementById('hometab_new_recovered');
   let country_name;
   let api_key = config.secret_api_key;
+  let covid_stat;
 
   // modal -- starts
   document.getElementById("select_country_modal_body").innerHTML = "";
@@ -113,6 +116,7 @@ window.addEventListener("load", () => {
     for (let i = 0; i < nodeList.length; i++) {
       nodeList[i].addEventListener ("click", (e) => {
         document.getElementById("select_country_modal_close").click();
+        covid_stat.destroy();
         homepage_country_data_fetch(e.target.innerText);
       });
     }
@@ -211,6 +215,8 @@ window.addEventListener("load", () => {
         .catch(error => console.log('error', error));
 
         // chart.js script
+        console.log(cases_list, deaths_list, recovered_list, dates);
+        generate_chart_from_fetch_data(cases_list, deaths_list, recovered_list, dates);
         // cases_list, deaths_list, recovered_list, dates
     }
 
@@ -257,50 +263,93 @@ window.addEventListener("load", () => {
       click_change_to_other_country_selector.classList.toggle("d-none");
       click_change_to_my_country_selector.classList.toggle("d-none");
     });
-
-    function selected_country_option(country_name){
-      console.log(country_name);
-      homepage_country_data_fetch("Bangladesh");
-    }
     //  change country, ends
 
 
     //  Chart-JS starts
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+    function generate_chart_from_fetch_data(cases_list, deaths_list, recovered_list, dates) {
+      const ctx = document.getElementById('covid_stat_chart').getContext('2d');
+      covid_stat = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: dates,
+          smooth: false,
+          datasets: [{
+            label: '# of Cases',
+            data: cases_list,
+            backgroundColor: "#0033cc",
+            borderColor: "#0033cc",
+            borderWidth: 1
+          },
+          {
+            label: '# of Deaths',
+            data: deaths_list,
+            backgroundColor: "#cc0000",
+            borderColor: "#cc0000",
+            borderWidth: 1
+          }]
+        },
+        options: {
+          elements: {
+            point:{
+              radius: 0
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                color: '#c2c2d6',
+                borderColor: 'black',
+                borderWidth: 2,
+
+              },
+              title: {
+                display: true,
+                color: 'black',
+                text: 'Dates',
+                font: {
+                  size: 16,
+                  weight: 'bold'
+                }
+              }
+            },
+            y: {
+              grid: {
+                color: '#c2c2d6',
+                borderColor: 'black',
+                borderWidth: 2,
+              },
+              title: {
+                display: true,
+                color: 'black',
+                text: 'Cases',
+                font: {
+                  size: 16,
+                  weight: 'bold'
+                }
+              },
+              beginAtZero: true
+            }
+          },
+          responsive: true,
+          plugins: {
+            tooltip: {
+              mode: 'index',
+              axis: 'xy',
+              position: 'nearest',
+              intersect: false
+            },
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: false,
+              text: "Situation Summary"
+            }
           }
         }
-      }
-    });
+      });
+    }
     //  Chart-JS ends
 
 
