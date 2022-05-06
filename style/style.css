@@ -89,7 +89,7 @@
 
 .chart-container {
   position:relative;
-  height:50vh;
+  height:100%;
   width:100%;
   border:3px solid #515190;
   border-radius:8px;
