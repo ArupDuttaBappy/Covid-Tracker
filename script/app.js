@@ -1,5 +1,11 @@
 window.addEventListener("load", () => {
 
+  let radio_input = 2;
+  let type = 0;
+  let radiobtn = document.getElementById("radio_last_all_data");
+  radiobtn.checked = true;
+  let country_name;
+
   //  navbar search
   document.getElementById("navbar_search_country_input").addEventListener("keyup", () => {
     document.getElementById("navbar_search_dropdown_tbody").innerHTML = "";
@@ -21,8 +27,9 @@ window.addEventListener("load", () => {
   document.getElementById("navbar_search_country_btn").addEventListener("click", (e) => {
     e.preventDefault();
     let key_cache = document.getElementById('navbar_search_country_input').value;
+    country_name = key_cache;
     covid_stat.destroy(); // destroy chart
-    homepage_country_data_fetch(key_cache);
+    homepage_country_data_fetch(key_cache, radio_input, type);
   });
 
   document.getElementById("navbar_search_dropdown_tbody").innerHTML = "";
@@ -40,7 +47,8 @@ window.addEventListener("load", () => {
     for (let i = 0; i < nodeList.length; i++) {
       nodeList[i].addEventListener ("click", (e) => {
         covid_stat.destroy();
-        homepage_country_data_fetch(e.target.innerText);
+        country_name = e.target.innerText;
+        homepage_country_data_fetch(e.target.innerText, radio_input, type);
         document.getElementById("navbar_search_country_input").value = e.target.innerText;
         document.getElementById("navbar_search_dropdown_div").classList.add("d-none");
       });
@@ -73,7 +81,6 @@ window.addEventListener("load", () => {
   let hometab_new_deaths_selector = document.getElementById('hometab_new_deaths');
   let hometab_total_recovered_selector = document.getElementById('hometab_total_recovered');
   let hometab_new_recovered_selector = document.getElementById('hometab_new_recovered');
-  let country_name;
   let api_key = config.secret_api_key;
   let covid_stat;
 
@@ -117,7 +124,8 @@ window.addEventListener("load", () => {
       nodeList[i].addEventListener ("click", (e) => {
         document.getElementById("select_country_modal_close").click();
         covid_stat.destroy();
-        homepage_country_data_fetch(e.target.innerText);
+        country_name = e.target.innerText;
+        homepage_country_data_fetch(e.target.innerText, radio_input, type);
       });
     }
   }
@@ -152,14 +160,17 @@ window.addEventListener("load", () => {
       .then(response => response.json())
       .then(data => {
         country_name = data.country_name;
-        homepage_country_data_fetch(country_name);
+        homepage_country_data_fetch(country_name, radio_input, type);
       })
       .catch(error => console.log('error', error));
     }
 
     user_location_country_fetch();
 
-    async function homepage_country_data_fetch(country_name) {
+    async function homepage_country_data_fetch(country_name, radio_input, type) {
+      let preformat_cases_list = [];
+      let preformat_deaths_list = [];
+      let preformat_recovered_list = [];
       let cases_list = [];
       let deaths_list = [];
       let recovered_list = [];
@@ -171,15 +182,15 @@ window.addEventListener("load", () => {
         .then(response => response.json())
         .then(data => {
           data.forEach((data) => {
-            cases_list.push(data.Cases);
+            preformat_cases_list.push(data.Cases);
             dates.push(format_date_for_chart(data.Date));
           });
           // console.log('cases_list',cases_list);
           hometab_country_name_selector.innerHTML = country_name || "Not Found!";
-          hometab_total_cases_selector.innerHTML = cases_list[cases_list.length - 1] || "0";
-          hometab_new_cases_selector.innerHTML = (cases_list[cases_list.length - 1] - cases_list[cases_list.length - 2]) || "0";
-          for (let i = 1; i < cases_list.length; i++) {
-            cases_list[i] = cases_list[i] - cases_list[i-1];
+          hometab_total_cases_selector.innerHTML = preformat_cases_list[preformat_cases_list.length - 1] || "0";
+          hometab_new_cases_selector.innerHTML = (preformat_cases_list[preformat_cases_list.length - 1] - preformat_cases_list[preformat_cases_list.length - 2]) || "0";
+          for (let i = 1; i < preformat_cases_list.length; i++) {
+            cases_list[i] = preformat_cases_list[i] - preformat_cases_list[i-1];
           }
         })
         .catch(error => console.log('error', error));
@@ -188,13 +199,13 @@ window.addEventListener("load", () => {
         .then(response => response.json())
         .then(data => {
           data.forEach((data) => {
-            deaths_list.push(data.Cases);
+            preformat_deaths_list.push(data.Cases);
           });
           // console.log('deaths_list',deaths_list);
-          hometab_total_deaths_selector.innerHTML = deaths_list[deaths_list.length - 1] || "0";
-          hometab_new_deaths_selector.innerHTML = (deaths_list[deaths_list.length - 1] - deaths_list[deaths_list.length - 2]) || "0";
-          for (let i = 1; i < deaths_list.length; i++) {
-            deaths_list[i] = deaths_list[i] - deaths_list[i-1];
+          hometab_total_deaths_selector.innerHTML = preformat_deaths_list[preformat_deaths_list.length - 1] || "0";
+          hometab_new_deaths_selector.innerHTML = (preformat_deaths_list[preformat_deaths_list.length - 1] - preformat_deaths_list[preformat_deaths_list.length - 2]) || "0";
+          for (let i = 1; i < preformat_deaths_list.length; i++) {
+            deaths_list[i] = preformat_deaths_list[i] - preformat_deaths_list[i-1];
           }
         })
         .catch(error => console.log('error', error));
@@ -203,21 +214,60 @@ window.addEventListener("load", () => {
         .then(response => response.json())
         .then(data => {
           data.forEach((data) => {
-            recovered_list.push(data.Cases);
+            preformat_recovered_list.push(data.Cases);
           });
           // console.log('recovered_list',recovered_list);
-          hometab_total_recovered_selector.innerHTML = recovered_list[recovered_list.length - 1] || "0";
-          hometab_new_recovered_selector.innerHTML = (recovered_list[recovered_list.length - 1] - recovered_list[recovered_list.length - 2]) || "0";
-          for (let i = 1; i < recovered_list.length; i++) {
-            recovered_list[i] = recovered_list[i] - recovered_list[i-1];
+          hometab_total_recovered_selector.innerHTML = preformat_recovered_list[preformat_recovered_list.length - 1] || "0";
+          hometab_new_recovered_selector.innerHTML = (preformat_recovered_list[preformat_recovered_list.length - 1] - preformat_recovered_list[preformat_recovered_list.length - 2]) || "0";
+          for (let i = 1; i < preformat_recovered_list.length; i++) {
+            recovered_list[i] = preformat_recovered_list[i] - preformat_recovered_list[i-1];
           }
         })
         .catch(error => console.log('error', error));
 
         // chart.js script
-        console.log(cases_list, deaths_list, recovered_list, dates);
-        generate_chart_from_fetch_data(cases_list, deaths_list, recovered_list, dates);
-        // cases_list, deaths_list, recovered_list, dates
+        if (radio_input == 2) {
+          radiobtn = document.getElementById("radio_last_all_data");
+          radiobtn.checked = true;
+
+          generate_chart_from_fetch_data(cases_list, deaths_list, recovered_list, dates, type);
+        }
+        else if (radio_input == 30) {
+          radiobtn = document.getElementById("radio_last_30_days");
+          radiobtn.checked = true;
+
+          let short_cases_list = [];
+          let short_deaths_list = [];
+          let short_recovered_list = [];
+          let short_dates = [];
+          let j = 0;
+          for(let i = dates.length - 31; i < dates.length; i++) {
+            short_cases_list[j] = cases_list[i];
+            short_deaths_list[j] = deaths_list[i];
+            short_recovered_list[j] = recovered_list[i];
+            short_dates[j] = dates[i];
+            j++;
+          }
+          generate_chart_from_fetch_data(short_cases_list, short_deaths_list, short_recovered_list, short_dates, type);
+        }
+        else if (radio_input == 180) {
+          radiobtn = document.getElementById("radio_last_6_months");
+          radiobtn.checked = true;
+
+          let short_cases_list = [];
+          let short_deaths_list = [];
+          let short_recovered_list = [];
+          let short_dates = [];
+          let j = 0;
+          for(let i = dates.length - 181; i < dates.length; i++) {
+            short_cases_list[j] = cases_list[i];
+            short_deaths_list[j] = deaths_list[i];
+            short_recovered_list[j] = recovered_list[i];
+            short_dates[j] = dates[i];
+            j++;
+          }
+          generate_chart_from_fetch_data(short_cases_list, short_deaths_list, short_recovered_list, short_dates, type);
+        }
     }
 
     function format_date_for_chart(fetchdate) {
@@ -259,6 +309,7 @@ window.addEventListener("load", () => {
     });
 
     click_change_to_my_country_selector.addEventListener("click", () => {
+      covid_stat.destroy();
       user_location_country_fetch();
       click_change_to_other_country_selector.classList.toggle("d-none");
       click_change_to_my_country_selector.classList.toggle("d-none");
@@ -270,17 +321,23 @@ window.addEventListener("load", () => {
     let nodeList2 = document.querySelectorAll(".form-check-input");
     for (let i = 0; i < nodeList2.length; i++) {
       nodeList2[i].addEventListener ("click", (e) => {
-        let radio_data = e.target.value;
-        console.log(radio_data);
+        covid_stat.destroy();
+        let radio_input = e.target.value;
+        homepage_country_data_fetch(country_name, radio_input, type);
       });
     }
     //  radio
 
 
-
     //  Chart-JS starts
-    function generate_chart_from_fetch_data(cases_list, deaths_list, recovered_list, dates) {
-      const ctx = document.getElementById('covid_stat_chart').getContext('2d');
+    function generate_chart_from_fetch_data(cases_list, deaths_list, recovered_list, dates, type) {
+      if (type == 0) {
+        const ctx = document.getElementById('covid_stat_chart').getContext('2d');
+      }
+      else if (type == 1) {
+        const ctx = document.getElementById('country_specified_stat').getContext('2d');
+      }
+
       covid_stat = new Chart(ctx, {
         type: 'line',
         data: {
@@ -401,8 +458,9 @@ window.addEventListener("load", () => {
       for(let i = 0 ; i < total_countries ; i++) {
         let country_code = sortable_country_matrix[i][7];
         country_code = country_code.toLowerCase();
-        country_table_row.innerHTML += `<tr>
+        country_table_row.innerHTML += `<tr class="country_list_row">
         <th scope="row" class="p-2"><div class="flag flag-${country_code}"></div>  ${sortable_country_matrix[i][0]}</th>
+        <td class="d-none">${sortable_country_matrix[i][0]}</td>
         <td>${sortable_country_matrix[i][1]}</td>
         <td>${sortable_country_matrix[i][2]}</td>
         <td>${sortable_country_matrix[i][3]}</td>
@@ -410,6 +468,16 @@ window.addEventListener("load", () => {
         <td>${sortable_country_matrix[i][5]}</td>
         <td>${sortable_country_matrix[i][6]}</td>
         </tr>`;
+      }
+
+      let nodeList3 = document.querySelectorAll(".country_list_row");
+      for (let i = 0; i < nodeList3.length; i++) {
+        nodeList3[i].addEventListener ("click", (e) => {
+          let country_specified = e.target.parentNode.children[1].innerHTML;
+          console.log(country_specified);
+          covid_stat.destroy();
+          homepage_country_data_fetch(country_specified, 2, 1);
+        });
       }
     })
     .catch(error => console.log('error', error));

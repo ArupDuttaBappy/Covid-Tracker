@@ -93,6 +93,17 @@
   cursor: pointer;
 }
 
+table > thead {
+  background: #e1e1ea;
+  top: 0;
+  position: sticky;
+  z-index: 5;
+}
+
+#pills_country_list_tabcontent div > table > tbody > tr {
+  cursor: pointer;
+}
+
 .chart-container {
   position:relative;
   height:100%;
