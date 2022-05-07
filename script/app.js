@@ -332,12 +332,12 @@ window.addEventListener("load", () => {
     //  Chart-JS starts
     function generate_chart_from_fetch_data(cases_list, deaths_list, recovered_list, dates, type) {
       if (type == 0) {
-        const ctx = document.getElementById('covid_stat_chart').getContext('2d');
+        console.log("000");
       }
       else if (type == 1) {
-        const ctx = document.getElementById('country_specified_stat').getContext('2d');
+        console.log("111");
       }
-
+      const ctx = document.getElementById('country_specified_stat').getContext('2d');
       covid_stat = new Chart(ctx, {
         type: 'line',
         data: {
@@ -458,7 +458,7 @@ window.addEventListener("load", () => {
       for(let i = 0 ; i < total_countries ; i++) {
         let country_code = sortable_country_matrix[i][7];
         country_code = country_code.toLowerCase();
-        country_table_row.innerHTML += `<tr class="country_list_row">
+        country_table_row.innerHTML += `<tr data-toggle="modal" data-target="#country_specified_stat_modal" class="country_list_row">
         <th scope="row" class="p-2"><div class="flag flag-${country_code}"></div>  ${sortable_country_matrix[i][0]}</th>
         <td class="d-none">${sortable_country_matrix[i][0]}</td>
         <td>${sortable_country_matrix[i][1]}</td>
