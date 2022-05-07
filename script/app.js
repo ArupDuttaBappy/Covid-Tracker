@@ -330,14 +330,17 @@ window.addEventListener("load", () => {
 
 
     //  Chart-JS starts
+    let ctx;
     function generate_chart_from_fetch_data(cases_list, deaths_list, recovered_list, dates, type) {
-      if (type == 0) {
-        console.log("000");
+      switch (type) {
+        case 0:
+          ctx = document.getElementById('covid_stat_chart').getContext('2d');
+          break;
+        case 1:
+          ctx = document.getElementById('country_specified_stat').getContext('2d');
+          break;
       }
-      else if (type == 1) {
-        console.log("111");
-      }
-      const ctx = document.getElementById('country_specified_stat').getContext('2d');
+      // const ctx = document.getElementById('country_specified_stat').getContext('2d');
       covid_stat = new Chart(ctx, {
         type: 'line',
         data: {
@@ -474,7 +477,7 @@ window.addEventListener("load", () => {
       for (let i = 0; i < nodeList3.length; i++) {
         nodeList3[i].addEventListener ("click", (e) => {
           let country_specified = e.target.parentNode.children[1].innerHTML;
-          console.log(country_specified);
+          document.getElementById("country_specified_stat_title").innerHTML = `Covid Stats - ${country_specified}`;
           covid_stat.destroy();
           homepage_country_data_fetch(country_specified, 2, 1);
         });
