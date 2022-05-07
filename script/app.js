@@ -266,6 +266,18 @@ window.addEventListener("load", () => {
     //  change country, ends
 
 
+    //   radio
+    let nodeList2 = document.querySelectorAll(".form-check-input");
+    for (let i = 0; i < nodeList2.length; i++) {
+      nodeList2[i].addEventListener ("click", (e) => {
+        let radio_data = e.target.value;
+        console.log(radio_data);
+      });
+    }
+    //  radio
+
+
+
     //  Chart-JS starts
     function generate_chart_from_fetch_data(cases_list, deaths_list, recovered_list, dates) {
       const ctx = document.getElementById('covid_stat_chart').getContext('2d');
@@ -352,18 +364,6 @@ window.addEventListener("load", () => {
     }
     //  Chart-JS ends
 
-    // document.getElementsByClassName('form-check-input').addEventListener('click', (e) => {
-    //   let radio_data = e.target.value;
-    //   console.log(radio_data);
-    // });
-    let nodeList2 = document.querySelectorAll(".form-check-input");
-    for (let i = 0; i < nodeList2.length; i++) {
-      nodeList2[i].addEventListener ("click", (e) => {
-        let radio_data = e.target.value;
-        console.log(radio_data);
-      });
-    }
-
 
 
     //  Country List Tab starts
@@ -375,7 +375,7 @@ window.addEventListener("load", () => {
     .then(data => {
       country_table_row.innerHTML = '';
       const total_countries = data.Countries.length;
-      let sortable_country_matrix = new Array(total_countries).fill(0).map(() => new Array(7).fill(0));
+      let sortable_country_matrix = new Array(total_countries).fill(0).map(() => new Array(8).fill(0));
       let i = 0;
       data.Countries.forEach(data => {
         sortable_country_matrix[i][0] = data.Country;
@@ -385,6 +385,7 @@ window.addEventListener("load", () => {
         sortable_country_matrix[i][4] = data.TotalDeaths;
         sortable_country_matrix[i][5] = data.NewRecovered;
         sortable_country_matrix[i][6] = data.TotalRecovered;
+        sortable_country_matrix[i][7] = data.CountryCode;
         i++;
       });
 
@@ -398,8 +399,10 @@ window.addEventListener("load", () => {
         }
       });
       for(let i = 0 ; i < total_countries ; i++) {
+        let country_code = sortable_country_matrix[i][7];
+        country_code = country_code.toLowerCase();
         country_table_row.innerHTML += `<tr>
-        <th scope="row" class="p-2">${sortable_country_matrix[i][0]}</th>
+        <th scope="row" class="p-2"><div class="flag flag-${country_code}"></div>  ${sortable_country_matrix[i][0]}</th>
         <td>${sortable_country_matrix[i][1]}</td>
         <td>${sortable_country_matrix[i][2]}</td>
         <td>${sortable_country_matrix[i][3]}</td>
