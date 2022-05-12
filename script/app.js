@@ -484,5 +484,6 @@ window.addEventListener("load", () => {
       }
     })
     .catch(error => console.log('error', error));
-  });
   //  Country List Tab ends
+
+});
