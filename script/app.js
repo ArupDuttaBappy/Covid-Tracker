@@ -436,8 +436,13 @@ window.addEventListener("load", () => {
       country_table_row.innerHTML = '';
       const total_countries = data.Countries.length;
       let sortable_country_matrix = new Array(total_countries).fill(0).map(() => new Array(8).fill(0));
+      let map_danger_index = {};
       let i = 0;
       data.Countries.forEach(data => {
+        // for Map
+        // map_danger_index formula = NewConfirmed+NewDeaths
+        map_danger_index[data.CountryCode] = (data.NewConfirmed + data.NewDeaths);
+
         sortable_country_matrix[i][0] = data.Country;
         sortable_country_matrix[i][1] = data.NewConfirmed;
         sortable_country_matrix[i][2] = data.TotalConfirmed;
@@ -449,6 +454,7 @@ window.addEventListener("load", () => {
         i++;
       });
 
+
       sortable_country_matrix.sort((a, b) => {
         // sorting ascending -> NewConfirmed + NewDeaths
         if ((a[1]+a[3]) === (b[1]+b[3])) {
@@ -458,6 +464,41 @@ window.addEventListener("load", () => {
           return ((a[1]+a[3]) < (b[1]+b[3])) ? -1 : 1;
         }
       });
+
+
+
+
+      // MAP script
+      $('#world-covid-map').vectorMap({
+        map: 'world_merc',
+        series: {
+          markers: [{
+            attribute: 'fill',
+            scale: ['#009933', '#ffcc00', '#ff0000'],
+            normalizeFunction: 'polynomial',
+            values: [108, 1512, 1750, 2781], // confused values
+            legend: {
+              vertical: true
+            }
+          }],
+          regions: [{
+            values: map_danger_index,
+            scale: ['#009933', '#ffcc00', '#ff0000'],
+            normalizeFunction: 'polynomial'
+          }]
+        },
+        onRegionClick: function(e, code){
+          console.log(code);
+        },
+        onRegionTipShow: function(e, el, code){
+          el.html(el.html() + '<br>New Cases: ' + map_danger_index[code]);
+        }
+      });
+      // MAP script
+
+
+
+
       for(let i = 0 ; i < total_countries ; i++) {
         let country_code = sortable_country_matrix[i][7];
         country_code = country_code.toLowerCase();
