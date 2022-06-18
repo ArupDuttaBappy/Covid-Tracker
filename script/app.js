@@ -489,6 +489,15 @@ window.addEventListener("load", () => {
         },
         onRegionClick: function(e, code){
           console.log(code);
+
+          country_list.forEach(data => {
+            if(data.ISO2 == code) {
+              document.getElementById("country_specified_stat_title").innerHTML = `Covid Stats - ${data.Country}`;
+              document.getElementById("country_specified_stat_modal_trigger").click();
+              covid_stat.destroy();
+              homepage_country_data_fetch(data.Country, 2, 1);
+            }
+          });
         },
         onRegionTipShow: function(e, el, code){
           el.html(el.html() + '<br>New Cases: ' + map_danger_index[code]);
