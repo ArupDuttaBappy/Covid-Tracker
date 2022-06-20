@@ -469,39 +469,44 @@ window.addEventListener("load", () => {
 
 
       // MAP script
-      $('#world-covid-map').vectorMap({
-        map: 'world_merc',
-        series: {
-          markers: [{
-            attribute: 'fill',
-            scale: ['#009933', '#ffcc00', '#ff0000'],
-            normalizeFunction: 'polynomial',
-            values: [108, 1512, 1750, 2781], // confused values
-            legend: {
-              vertical: true
-            }
-          }],
-          regions: [{
-            values: map_danger_index,
-            scale: ['#009933', '#ffcc00', '#ff0000'],
-            normalizeFunction: 'polynomial'
-          }]
-        },
-        onRegionClick: function(e, code){
-          console.log(code);
+      document.getElementById("navbar_pills_map_tab").addEventListener("click", e => {
+        setTimeout(e => {
+          document.getElementById("world-covid-map").innerHTML = "";
+          $('#world-covid-map').vectorMap({
+            map: 'world_merc',
+            series: {
+              markers: [{
+                attribute: 'fill',
+                scale: ['#009933', '#ffcc00', '#ff0000'],
+                normalizeFunction: 'polynomial',
+                values: [108, 1512, 1750, 2781], // confused values
+                legend: {
+                  vertical: true
+                }
+              }],
+              regions: [{
+                values: map_danger_index,
+                scale: ['#009933', '#ffcc00', '#ff0000'],
+                normalizeFunction: 'polynomial'
+              }]
+            },
+            onRegionClick: function(e, code){
+              console.log(code);
 
-          country_list.forEach(data => {
-            if(data.ISO2 == code) {
-              document.getElementById("country_specified_stat_title").innerHTML = `Covid Stats - ${data.Country}`;
-              document.getElementById("country_specified_stat_modal_trigger").click();
-              covid_stat.destroy();
-              homepage_country_data_fetch(data.Country, 2, 1);
+              country_list.forEach(data => {
+                if(data.ISO2 == code) {
+                  document.getElementById("country_specified_stat_title").innerHTML = `Covid Stats - ${data.Country}`;
+                  document.getElementById("country_specified_stat_modal_trigger").click();
+                  covid_stat.destroy();
+                  homepage_country_data_fetch(data.Country, 2, 1);
+                }
+              });
+            },
+            onRegionTipShow: function(e, el, code){
+              el.html(el.html() + '<br>New Cases: ' + map_danger_index[code]);
             }
           });
-        },
-        onRegionTipShow: function(e, el, code){
-          el.html(el.html() + '<br>New Cases: ' + map_danger_index[code]);
-        }
+        }, 500);
       });
       // MAP script
 
