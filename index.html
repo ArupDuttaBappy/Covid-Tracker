@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="style/style.css">
   <link rel="stylesheet" href="style/flag-sprites.css">
   <link rel="stylesheet" href="script/jquery-jvectormap-2.0.5.css" type="text/css" media="screen"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arima:wght@700&display=swap" rel="stylesheet">
 
   <title>Covid Tracker</title>
 </head>
@@ -42,7 +45,7 @@
             </ul>
             <div id="navbar_search_div">
               <div class="d-flex" id="navbar_search_form">
-                <input class="form-control me-2" id="navbar_search_country_input" autocomplete="off" type="search" placeholder="search country" aria-label="Search">
+                <input class="form-control me-2" id="navbar_search_country_input" autocomplete="off" type="search" placeholder="Search country" aria-label="Search">
                 <button class="" id="navbar_search_country_btn" type="submit">Search</button>
               </div>
               <div id="navbar_search_dropdown_div" class="d-none">
@@ -143,7 +146,44 @@
 
 
           <div class="tab-pane fade show active" id="pills_subscription_tabcontent" role="tabpanel" aria-labelledby="navbar_pills_subscription_tab">
-            <!--  -->
+            <div id="subscription_page" style="height:70vh">
+              <div class="m-auto " style="width:60%">
+                <div class="p-4" style="font-family:'Arima'">
+                  <h2>Get Latest Stats</h2>
+                  <h6>* In your inbox</h6>
+                  <h6>* New Cases, New Deaths, New Recovered</h6>
+                </div>
+                <form class="form-control p-4" style="box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <input type="text" class="form-control" placeholder="First name">
+                    </div>
+                    <div class="col-lg-6">
+                      <input type="text" class="form-control" placeholder="Last name">
+                    </div>
+                  </div>
+                  <div class="form-group my-2">
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                  </div>
+                  <div class="form-group my-2">
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter country name">
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                      Daily
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                    <label class="form-check-label" for="exampleRadios2">
+                      Weekly
+                    </label>
+                  </div>
+                  <button type="submit" class="btn btn-success mx-5 my-2" style="font-weight:700">Subscribe</button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -111,3 +111,7 @@ table > thead {
   border:3px solid #515190;
   border-radius:8px;
 }
+
+#pills_subscription_tabcontent {
+  background-image: url('../covid_bg.jpg');
+}
