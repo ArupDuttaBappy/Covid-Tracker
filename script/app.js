@@ -541,4 +541,52 @@ window.addEventListener("load", () => {
     .catch(error => console.log('error', error));
   //  Country List Tab ends
 
+
+  // Subscription tab starts
+
+  function add_eventlistener_to_modal_elements2() {
+    let nodeList = document.querySelectorAll(".country_modal_element");
+    for (let i = 0; i < nodeList.length; i++) {
+      nodeList[i].addEventListener ("click", (e) => {
+        document.getElementById("select_country_modal_close").click();
+        document.getElementById("select_country_modal_search_input2").classList.add('d-none');
+        document.getElementById("select_country_modal_search_input").classList.remove('d-none');
+        document.getElementById("subscription_input_country").value = e.target.innerText;
+      });
+    }
+  }
+
+  document.getElementById("select_country_modal_search_input2").addEventListener("keyup", () => {
+    document.getElementById("select_country_modal_body").innerHTML = "";
+    let keytyped_input = document.getElementById("select_country_modal_search_input2").value.toUpperCase();
+    country_list.forEach(data => {
+      if(data.Country.toUpperCase().includes(keytyped_input)) {
+        populate_modal(data.Country);
+      }
+    });
+    add_eventlistener_to_modal_elements2();
+  });
+
+  document.getElementById("subscription_input_country").addEventListener('focus', (event) => {
+    document.getElementById("select_country_modal_search_input2").classList.remove('d-none');
+    document.getElementById("select_country_modal_search_input").classList.add('d-none');
+    document.getElementById("subscription_input_country").setAttribute("data-toggle", "modal");
+    document.getElementById("subscription_input_country").setAttribute("data-target", "#select_country_modal");
+    document.getElementById("select_country_modal_search_input2").value = '';
+    country_list.forEach(data => {
+      populate_modal(data.Country);
+      add_eventlistener_to_modal_elements2();
+    });
+  });
+
+  let newsletter_frequency = document.querySelectorAll(".newsletter-frequency-check-input");
+  let newsletter_frequency_value = 1;
+  for (let i = 0; i < newsletter_frequency.length; i++) {
+    newsletter_frequency[i].addEventListener ("click", (e) => {
+      let newsletter_frequency_value = e.target.value;
+    });
+  }
+
+  // Subscription tab ends
+
 });
