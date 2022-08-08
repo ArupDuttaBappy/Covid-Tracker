@@ -115,3 +115,33 @@ table > thead {
 #pills_subscription_tabcontent {
   background-image: url('../covid_bg.jpg');
 }
+
+
+.faq-section .mb-0 > a {
+  display: block;
+  position: relative;
+}
+
+.faq-section .mb-0 > a:after {
+  content: "\f067";
+  font-family: "Font Awesome 5 Free";
+  position: absolute;
+  right: 0;
+  font-weight: 600;
+}
+
+.faq-section .mb-0 > a[aria-expanded="true"]:after {
+  content: "\f068";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 600;
+}
+
+.faq-section a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 18px;
+}
+
+.faq-section a:hover {
+  text-decoration: underline;
+}

@@ -31,7 +31,7 @@
           <div class="collapse navbar-collapse" id="navbar_supported_content">
             <ul class="nav nav-pills me-auto mb-2 mb-lg-0" role="tablist">
               <li class="nav-item" role="presentation">
-                <button class="nav-link" id="navbar_pills_home_tab" data-bs-toggle="pill" data-bs-target="#pills_home_tabcontent" type="button" role="tab" aria-controls="pills_home_tabcontent" aria-selected="true">Home</button>
+                <button class="nav-link active" id="navbar_pills_home_tab" data-bs-toggle="pill" data-bs-target="#pills_home_tabcontent" type="button" role="tab" aria-controls="pills_home_tabcontent" aria-selected="true">Home</button>
               </li>
               <li class="nav-item" role="presentation">
                 <button class="nav-link" id="navbar_pills_map_tab" data-bs-toggle="pill" data-bs-target="#pills_map_tabcontent" type="button" role="tab" aria-controls="pills_map_tabcontent" aria-selected="false">Map View</button>
@@ -40,7 +40,10 @@
                 <button class="nav-link" id="navbar_pills_country_list_tab" data-bs-toggle="pill" data-bs-target="#pills_country_list_tabcontent" type="button" role="tab" aria-controls="pills_country_list_tabcontent" aria-selected="false">Country List</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="navbar_pills_subscription_tab" data-bs-toggle="pill" data-bs-target="#pills_subscription_tabcontent" type="button" role="tab" aria-controls="pills_subscription_tabcontent" aria-selected="false">Subscription!</button>
+                <button class="nav-link" id="navbar_pills_subscription_tab" data-bs-toggle="pill" data-bs-target="#pills_subscription_tabcontent" type="button" role="tab" aria-controls="pills_subscription_tabcontent" aria-selected="false">Subscription!</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="navbar_pills_faq_tab" data-bs-toggle="pill" data-bs-target="#pills_faq_tabcontent" type="button" role="tab" aria-controls="pills_faq_tabcontent" aria-selected="false">FAQ</button>
               </li>
             </ul>
             <div id="navbar_search_div">
@@ -65,7 +68,7 @@
       </nav>
       <div class="container m-0 p-0" style="background-color:#d1d1e0">
         <div class="tab-content bg-light" id="pills_tabcontent">
-          <div class="tab-pane fade" id="pills_home_tabcontent" role="tabpanel" aria-labelledby="navbar_pills_home_tab">
+          <div class="tab-pane fade show active" id="pills_home_tabcontent" role="tabpanel" aria-labelledby="navbar_pills_home_tab">
             <!-- highlights -->
             <div class="row">
               <div class="col text-center m-auto d-flex flex-column">
@@ -145,7 +148,7 @@
           </div>
 
 
-          <div class="tab-pane fade show active" id="pills_subscription_tabcontent" role="tabpanel" aria-labelledby="navbar_pills_subscription_tab">
+          <div class="tab-pane fade" id="pills_subscription_tabcontent" role="tabpanel" aria-labelledby="navbar_pills_subscription_tab">
             <div id="subscription_page_content" style="height:70vh">
               <div class="m-auto " style="width:60%">
                 <div class="p-4" style="font-family:'Arima'">
@@ -182,6 +185,101 @@
                   </div>
                   <button type="submit" class="btn btn-success mx-5 my-2" id="subscription_input_submit_btn" style="font-weight:700">Subscribe</button>
                 </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="pills_faq_tabcontent" role="tabpanel" aria-labelledby="navbar_pills_faq_tab">
+            <div  style="overflow-y:scroll; height:70vh">
+              <div class="card">
+                <div class="card-header text-center">
+                  <h5>Frequently Asked Questions</h5>
+                </div>
+                <div class="card-body">
+                  <div class="flex flex-column mb-5 mt-4 faq-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div id="accordion">
+                          <div class="card">
+                            <div class="card-header" id="heading-1">
+                              <h5 class="mb-0">
+                                <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="false" aria-controls="collapse-1">
+                                  How do you get these data?
+                                </a>
+                              </h5>
+                            </div>
+                            <div id="collapse-1" class="collapse" data-parent="#accordion" aria-labelledby="heading-1">
+                              <div class="card-body">
+                                We are using <a href="https://documenter.getpostman.com/view/10808728/SzS8rjbc#27454960-ea1c-4b91-a0b6-0468bb4e6712">
+                                Coronavirus COVID19 API</a> to populate data appropriately. <a href="https://covid19api.com/">Covid19API</a> is a free API for data on the Coronavirus.
+                                <br>Data is sourced from <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a>.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <div class="card-header" id="heading-2">
+                              <h5 class="mb-0">
+                                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
+                                  Is the subscription (daily/weekly) free?
+                                </a>
+                              </h5>
+                            </div>
+                            <div id="collapse-2" class="collapse" data-parent="#accordion" aria-labelledby="heading-2">
+                              <div class="card-body">
+                                Yes! Both daily and weekly subscription are free.<br>
+                                You can use multiple email address to subscribe.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <div class="card-header" id="heading-3">
+                              <h5 class="mb-0">
+                                <a role="button" data-toggle="collapse" href="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
+                                  I think my country is not on the list. What ca I do?
+                                </a>
+                              </h5>
+                            </div>
+                            <div id="collapse-3" class="collapse" data-parent="#accordion" aria-labelledby="heading-3">
+                              <div class="card-body">
+                                We are limited by the data Covid19API providing us.<br>
+                                Please redirect to <a href="https://www.who.int/countries/">this</a> site to know current COVID-19 situation in your country.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <div class="card-header" id="heading-4">
+                              <h5 class="mb-0">
+                                <a role="button" data-toggle="collapse" href="#collapse-4" aria-expanded="false" aria-controls="collapse-4">
+                                  A false information observed. How to report?
+                                </a>
+                              </h5>
+                            </div>
+                            <div id="collapse-4" class="collapse" data-parent="#accordion" aria-labelledby="heading-4">
+                              <div class="card-body">
+                                We are limited by the data Covid19API providing us.<br>
+                                Please redirect to <a href="https://covid19.who.int/">this</a> site to get all latest COVID information.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <div class="card-header" id="heading-5">
+                              <h5 class="mb-0">
+                                <a role="button" data-toggle="collapse" href="#collapse-5" aria-expanded="false" aria-controls="collapse-5">
+                                  How to unsubscribe from subscription list?
+                                </a>
+                              </h5>
+                            </div>
+                            <div id="collapse-5" class="collapse" data-parent="#accordion" aria-labelledby="heading-5">
+                              <div class="card-body">
+                                Please follow the procedures of your mail server to unsubscribe from mailing list.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

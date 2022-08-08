@@ -511,8 +511,6 @@ window.addEventListener("load", () => {
       // MAP script
 
 
-
-
       for(let i = 0 ; i < total_countries ; i++) {
         let country_code = sortable_country_matrix[i][7];
         country_code = country_code.toLowerCase();
