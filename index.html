@@ -156,34 +156,34 @@
                   <h6>* In your inbox</h6>
                   <h6>* New Cases, New Deaths, New Recovered</h6>
                 </div>
-                <form class="form-control p-4" style="box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;">
+                <form action="server/add_subscriber.php" method="post" class="form-control p-4" style="box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;">
                   <div class="row">
                     <div class="col-lg-6">
-                      <input type="text" class="form-control" id="subscription_input_firstname" placeholder="First name">
+                      <input type="text" class="form-control" name="first_name" id="subscription_input_firstname" placeholder="First name">
                     </div>
                     <div class="col-lg-6">
-                      <input type="text" class="form-control" id="subscription_input_lastname" placeholder="Last name">
+                      <input type="text" class="form-control" name="last_name" id="subscription_input_lastname" placeholder="Last name">
                     </div>
                   </div>
                   <div class="form-group my-2">
-                    <input type="email" class="form-control" id="subscription_input_email" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="email" class="form-control" name="email" id="subscription_input_email" aria-describedby="emailHelp" placeholder="Enter email" required>
                   </div>
                   <div class="form-group my-2">
-                    <input type="text" class="form-control" id="subscription_input_country" placeholder="Enter country name">
+                    <input type="text" class="form-control" name="country_name" id="subscription_input_country" placeholder="Enter country name" required>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="newsletter-frequency-check-input" type="radio" name="daily-weekly" value="1" id="subscription_input_daily" checked>
+                    <input class="newsletter-frequency-check-input" type="radio" name="daily_weekly" value="1" id="subscription_input_daily" checked>
                     <label class="form-check-label" for="subscription_input_daily">
                       Daily
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="newsletter-frequency-check-input" type="radio" name="daily-weekly" value="7" id="subscription_input_weekly">
+                    <input class="newsletter-frequency-check-input" type="radio" name="daily_weekly" value="7" id="subscription_input_weekly">
                     <label class="form-check-label" for="subscription_input_weekly">
                       Weekly
                     </label>
                   </div>
-                  <button type="submit" class="btn btn-success mx-5 my-2" id="subscription_input_submit_btn" style="font-weight:700">Subscribe</button>
+                  <button type="submit" name="subscription_submit" class="btn btn-success mx-5 my-2" id="subscription_input_submit_btn" style="font-weight:700">Subscribe</button>
                 </form>
               </div>
             </div>
