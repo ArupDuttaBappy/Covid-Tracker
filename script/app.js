@@ -585,6 +585,83 @@ window.addEventListener("load", () => {
     });
   }
 
+
+  // form scripts
+  document.getElementById("subscription_input_submit_btn").addEventListener("click", subscription_submit_func);
+
+  function subscription_submit_func() {
+    let first_name = document.getElementById('subscription_input_firstname').value;
+    let last_name = document.getElementById('subscription_input_lastname').value;
+    let email = document.getElementById('subscription_input_email').value;
+    let country_name = document.getElementById('subscription_input_country').value;
+    let daily_weekly = document.querySelector('input[name="daily_weekly"]:checked').value;
+    // document.getElementById('subscription_input_daily').value || document.getElementById('subscription_input_weekly').value;
+
+    let formdata = 'first_name=' + first_name + '&last_name=' + last_name + '&email=' + email + '&country_name=' + country_name +'&daily_weekly=' + daily_weekly;
+
+    $.ajax({
+		 type: "POST",
+		 url: "server/add_subscriber.php", //call storeemdata.php to store form data
+		 data: formdata,
+		 cache: false,
+		 success: function(response) {
+      toastr.options = {
+        "closeButton": true,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-bottom-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      }
+
+      toastr.success(response);
+		 }
+	  });
+
+    //
+    // let xmlHttp = new XMLHttpRequest();
+    // xmlHttp.onreadystatechange = function()
+    // {
+    //   if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+    //     alert(xmlHttp.responseText);
+    //     // Set the options that I want
+    //     // toastr.options = {
+    //     //   "closeButton": true,
+    //     //   "newestOnTop": false,
+    //     //   "progressBar": true,
+    //     //   "positionClass": "toast-bottom-center",
+    //     //   "preventDuplicates": false,
+    //     //   "onclick": null,
+    //     //   "showDuration": "300",
+    //     //   "hideDuration": "1000",
+    //     //   "timeOut": "5000",
+    //     //   "extendedTimeOut": "1000",
+    //     //   "showEasing": "swing",
+    //     //   "hideEasing": "linear",
+    //     //   "showMethod": "fadeIn",
+    //     //   "hideMethod": "fadeOut"
+    //     // }
+    //     //
+    //     // toastr.success("Hello World!");
+    //   }
+    //   else {
+    //
+    //   }
+    // }
+    // xmlHttp.open("post", "server/add_subscriber.php");
+    // xmlHttp.send(formData);
+  }
+
+
+
   // Subscription tab ends
 
 });

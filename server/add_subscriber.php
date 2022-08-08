@@ -16,7 +16,7 @@ $sqlquery = "INSERT INTO `subscribers` (`first_name`, `last_name`, `email`, `cou
 
 if(mysqli_query($conn, $sqlquery))
 {
-    echo "Subscriber added successfully.";
+    echo "Subscribed successfully!";
 }
 else
 {
