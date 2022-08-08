@@ -601,7 +601,7 @@ window.addEventListener("load", () => {
 
     $.ajax({
 		 type: "POST",
-		 url: "server/add_subscriber.php", //call storeemdata.php to store form data
+		 url: "server/add_subscriber.php",
 		 data: formdata,
 		 cache: false,
 		 success: function(response) {
@@ -609,7 +609,7 @@ window.addEventListener("load", () => {
         "closeButton": true,
         "newestOnTop": false,
         "progressBar": true,
-        "positionClass": "toast-bottom-center",
+        "positionClass": "toast-bottom-right",
         "preventDuplicates": false,
         "onclick": null,
         "showDuration": "300",
@@ -621,46 +621,10 @@ window.addEventListener("load", () => {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
       }
-
       toastr.success(response);
 		 }
 	  });
-
-    //
-    // let xmlHttp = new XMLHttpRequest();
-    // xmlHttp.onreadystatechange = function()
-    // {
-    //   if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-    //     alert(xmlHttp.responseText);
-    //     // Set the options that I want
-    //     // toastr.options = {
-    //     //   "closeButton": true,
-    //     //   "newestOnTop": false,
-    //     //   "progressBar": true,
-    //     //   "positionClass": "toast-bottom-center",
-    //     //   "preventDuplicates": false,
-    //     //   "onclick": null,
-    //     //   "showDuration": "300",
-    //     //   "hideDuration": "1000",
-    //     //   "timeOut": "5000",
-    //     //   "extendedTimeOut": "1000",
-    //     //   "showEasing": "swing",
-    //     //   "hideEasing": "linear",
-    //     //   "showMethod": "fadeIn",
-    //     //   "hideMethod": "fadeOut"
-    //     // }
-    //     //
-    //     // toastr.success("Hello World!");
-    //   }
-    //   else {
-    //
-    //   }
-    // }
-    // xmlHttp.open("post", "server/add_subscriber.php");
-    // xmlHttp.send(formData);
   }
-
-
 
   // Subscription tab ends
 
