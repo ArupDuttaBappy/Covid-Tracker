@@ -17,8 +17,14 @@ while($row = mysqli_fetch_assoc($result)) {
 
 for($i = 0; $i < count($email_list); $i++) {
   $to = $email_list[$i];
-  $subject = 'Covid-Tracker Stats Newsletter';
-  $message = file_get_contents("email-template.html");
+  $subject = 'Covid-Tracker Newsletter';
+
+  // $message = file_get_contents("email-template.html");
+	$message = "Hello " . $first_name_list[$i] . " " . $last_name_list[$i] . ",\n";
+	$message .= "This mail is part of the regular newsletter from Covid-Tracker.\n";
+	$message .= "For more information, visit Covid-Tracker.\n";
+	$message .= "Have a nice day!\n";
+
 
   $headers  = 'MIME-Version: 1.0' . "\r\n";
   $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
