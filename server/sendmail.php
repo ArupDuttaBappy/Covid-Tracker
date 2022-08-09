@@ -22,9 +22,14 @@ for($i = 0; $i < count($email_list); $i++) {
 
   $headers  = 'MIME-Version: 1.0' . "\r\n";
   $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	$headers .= 'From: ad.bappy10@gmail.com' . "\r\n";
+	$headers = 'From:ad.bappy10@gmail.com' . "\r\n";
 
-  mail($to, $subject, $message, $headers);
+	if(mail($to, $subject, $message, $headers)) {
+		echo "success";
+	}
+	else {
+		echo "failed";
+	}
 }
 
 ?>
