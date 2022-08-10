@@ -587,14 +587,36 @@ window.addEventListener("load", () => {
 
 
   // form scripts
-  document.getElementById("subscription_input_submit_btn").addEventListener("click", subscription_submit_func);
 
-  function subscription_submit_func() {
+  function checkMailValidity(email) {
+    let filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if (!filter.test(email)) {
+      alert('Please provide a valid email address');
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
+  document.getElementById("subscription_input_submit_btn").addEventListener("click", () => {
     let first_name = document.getElementById('subscription_input_firstname').value;
     let last_name = document.getElementById('subscription_input_lastname').value;
     let email = document.getElementById('subscription_input_email').value;
     let country_name = document.getElementById('subscription_input_country').value;
     let daily_weekly = document.querySelector('input[name="daily_weekly"]:checked').value;
+
+    if(first_name && last_name && email && country_name) {
+      if(checkMailValidity(email)) {
+        subscription_submit_func(first_name, last_name, email, country_name, daily_weekly);
+      }
+    }
+    else {
+      alert("Please fill in all fields.");
+    }
+  });
+
+  function subscription_submit_func(first_name, last_name, email, country_name, daily_weekly) {
     // document.getElementById('subscription_input_daily').value || document.getElementById('subscription_input_weekly').value;
     document.getElementById('subscription_input_firstname').value = '';
     document.getElementById('subscription_input_lastname').value = '';
