@@ -22,6 +22,12 @@ for($i = 0; $i < count($email_list); $i++) {
   // $message = file_get_contents("email-template.html");
 	$message = "Hello " . $first_name_list[$i] . " " . $last_name_list[$i] . ",\n";
 	$message .= "This mail is part of the regular newsletter from Covid-Tracker.\n";
+	if($newsletter_frequency_list[$i] == 1) {
+		$message .= "You've daily subscription for COVID stats of " . $country_name_list[$i] . ".\n";
+	}
+	else if($newsletter_frequency_list[$i] == 7) {
+		$message .= "You've weekly subscription for COVID stats of " . $country_name_list[$i] . ".\n";
+	}
 	$message .= "For more information, visit Covid-Tracker.\n";
 	$message .= "Have a nice day!\n";
 
@@ -31,10 +37,10 @@ for($i = 0; $i < count($email_list); $i++) {
 	$headers = 'From:ad.bappy10@gmail.com' . "\r\n";
 
 	if(mail($to, $subject, $message, $headers)) {
-		echo "success";
+		echo "[success] mail sent to $to\n";
 	}
 	else {
-		echo "failed";
+		echo "[fail] mail not sent to $to\n";
 	}
 }
 

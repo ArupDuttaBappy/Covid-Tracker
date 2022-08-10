@@ -596,6 +596,10 @@ window.addEventListener("load", () => {
     let country_name = document.getElementById('subscription_input_country').value;
     let daily_weekly = document.querySelector('input[name="daily_weekly"]:checked').value;
     // document.getElementById('subscription_input_daily').value || document.getElementById('subscription_input_weekly').value;
+    document.getElementById('subscription_input_firstname').value = '';
+    document.getElementById('subscription_input_lastname').value = '';
+    document.getElementById('subscription_input_email').value = '';
+    document.getElementById('subscription_input_country').value = '';
 
     let formdata = 'first_name=' + first_name + '&last_name=' + last_name + '&email=' + email + '&country_name=' + country_name +'&daily_weekly=' + daily_weekly;
 
