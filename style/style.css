@@ -145,3 +145,11 @@ table > thead {
 .faq-section a:hover {
   text-decoration: underline;
 }
+
+#accordion2 a {
+  color: #006080 !important;
+}
+
+#accordion3 table td {
+  font-weight: 500;
+}
